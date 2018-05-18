@@ -8,7 +8,7 @@ all: javatrace.jar
 
 javatrace.jar: es/bsc/cepbatools/extrae/Wrapper.java
 	$(JAVAC) $(BASE_DIR)/src/java-connector/jni/es/bsc/cepbatools/extrae/Wrapper.java -d .
-	$(JAVAH) -d $(JNI_INCLUDE_DIR) -jni es.bsc.cepbatools.extrae.Wrapper
+	$(JAVAH) -d $(JNI_INCLUDE_DIR) -classpath . -jni es.bsc.cepbatools.extrae.Wrapper
 	$(JAR) cvf javatrace.jar es/bsc/cepbatools/extrae/Wrapper.class 
 
 clean-local:
