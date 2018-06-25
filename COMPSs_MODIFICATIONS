@@ -20,4 +20,4 @@ src/others/pyextrae/common/extrae.py.in Avoid tracing subcalls to C routines (fr
 src/others/pyextrae/common/extrae.py.in Use os.getenv to set EXTRAE_HOME instead of hardcoding during install (otherwise causes problems with package installations). Replace:
                     ExtraeHome     = "@sub_PREFIX@"
                     ExtraeHome     = os.getenv("EXTRAE_HOME")
-disable io instrumentation (install flag)
+install             Disable io instrumentation (install flag) change line  "--enable-instrument-io \" for "--disable-instrument-io \"
