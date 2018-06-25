@@ -56,7 +56,7 @@
               --disable-openmp \
               --enable-nanos \
               --disable-smpss \
-              --enable-instrument-io \
+              --disable-instrument-io \
               --prefix=${targetDir} \
               --libdir=${targetDir}/lib
   if [ $? -ne 0 ]; then
