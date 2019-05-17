@@ -34,7 +34,7 @@
         mpiBaseDir=${I_MPI_ROOT}
     fi
 
-    mpiArg="--with-mpi=${mpiBaseDir} --enable-parallel-merge"
+    mpiArg="--with-mpi=${mpiBaseDir} --with-mpi-headers=${mpiBaseDir}/intel64/include/ --with-mpi-libs=${mpiBaseDir}/intel64/lib/release/ --enable-parallel-merge"
   fi
 
   # Create installation folder
