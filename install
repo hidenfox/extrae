@@ -30,13 +30,17 @@
     # MPI available detect openmpi or impi
     if [ -z "$I_MPI_ROOT" ]; then
         mpiBaseDir=${mpiPath%/bin**}
+        mpiHeaders="--with-mpi-headers=${mpiBaseDir}/include/"
+        mpiLib="--with-mpi-libs=${mpiBaseDir}/lib/"
     else
         mpiBaseDir=${I_MPI_ROOT}
+        mpiHeaders="${mpiBaseDir}/intel64/include/"
+        mpiLib="${mpiBaseDir}/intel64/lib/"
     fi
     # Intel usual folder structure
     # mpiArg="--with-mpi=${mpiBaseDir} --with-mpi-headers=${mpiBaseDir}/intel64/include/ --with-mpi-libs=${mpiBaseDir}/intel64/lib/release/ --enable-parallel-merge"
     # Openmpi usual folder structure
-    mpiArg="--with-mpi=${mpiBaseDir} --with-mpi-headers=${mpiBaseDir}/include/ --with-mpi-libs=${mpiBaseDir}/lib/ --enable-parallel-merge"
+    mpiArg="--with-mpi=${mpiBaseDir} --with-mpi-headers=${mpiHeaders} --with-mpi-libs=${mpiLib} --enable-parallel-merge"
   fi
 
   # Create installation folder
