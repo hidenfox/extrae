@@ -21,3 +21,5 @@ src/others/pyextrae/common/extrae.py.in Use os.getenv to set EXTRAE_HOME instead
                     ExtraeHome     = "@sub_PREFIX@"
                     ExtraeHome     = os.getenv("EXTRAE_HOME")
 install             Disable io instrumentation (install flag) change line  "--enable-instrument-io \" for "--disable-instrument-io \"
+
+src/merger/paraver/labels.h` (l.88) 	VALUE_LBL increased to 300

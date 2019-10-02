@@ -85,7 +85,7 @@ typedef struct evttype_t
 evttype_t;
 
 
-#define VALUE_LBL   150
+#define VALUE_LBL   300
 typedef struct value_t
 {
   int value;
