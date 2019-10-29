@@ -8,22 +8,21 @@
     tryEnableMPIMerge=false
   fi
 
-  scriptDir=$(pwd)/$(dirname $0)
-
   # Setup Extrae for PAPI (or not) 
   papiPath=$(which papi_avail 2> /dev/null)
-  if [ -z ${papiPath} ]; then
+  if [ -z "${papiPath}" ]; then
     # No PAPI available
     papiArg="--without-papi"
   else
     # PAPI available
-    papiBaseDir=${papiPath%/bin**}
+    papiRealPath=$(readlink -f "${papiPath}")
+    papiBaseDir=${papiRealPath%/bin**}
     papiArg="--with-papi=${papiBaseDir}"
   fi
 
   # Setup MPI for parallel merge (or not)
   mpiPath=$(which mpirun 2> /dev/null)
-  if ! $tryEnableMPIMerge || [ -z ${mpiPath} ]; then
+  if ! $tryEnableMPIMerge || [ -z "${mpiPath}" ]; then
     # No MPI available
     mpiArg="--without-mpi"
   else
@@ -38,36 +37,38 @@
   fi
 
   # Create installation folder
-  mkdir -p ${targetDir}
+  mkdir -p "${targetDir}"
 
   # Configure, compile and install
   autoreconf --force --install
-  if [ $? -ne 0 ]; then
-    exit 1
+  ev=$?
+  if [ "$ev" -ne 0 ]; then
+    exit $ev
   fi
 
   ./configure --enable-gettimeofday-clock \
               --without-unwind \
               --without-dyninst \
               --without-binutils \
-              ${mpiArg} \
-              ${papiArg} \
-              --with-java-jdk=${JAVA_HOME} \
+              "${mpiArg}" \
+              "${papiArg}" \
+              --with-java-jdk="${JAVA_HOME}" \
               --disable-openmp \
               --enable-nanos \
               --disable-smpss \
               --disable-instrument-io \
-              --prefix=${targetDir} \
-              --libdir=${targetDir}/lib
-  if [ $? -ne 0 ]; then
-    exit 1
+              --prefix="${targetDir}" \
+              --libdir="${targetDir}/lib"
+  ev=$?
+  if [ "$ev" -ne 0 ]; then
+    exit $ev
   fi
 
   make clean install
-  if [ $? -ne 0 ]; then
-    exit 1
+  ev=$?
+  if [ "$ev" -ne 0 ]; then
+    exit $ev
   fi  
 
   # Exit normal
   exit 0
-
