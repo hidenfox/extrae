@@ -26,3 +26,4 @@ src/merger/paraver/labels.h` (l.88) 	VALUE_LBL increased to 300
 
 src/tracer/wrappers/API/wrapper.c       add patch for raise conditions in writting pthreads buffers 
 
+INSTALL -> INSTALL.txt due to mac issue
